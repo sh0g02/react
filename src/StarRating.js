@@ -6,15 +6,40 @@ import { FaStar } from 'react-icons/fa';
 const Star = ({ selected = false, onSelect = f => f }) => (
   <FaStar color={selected ? 'red' : 'grey'} onClick={onSelect}/>
 );
+//
+// export default function StarRating({ style = {}, totalStars = 5, ...props }) {
+//   // ステートの初期値を受け取って、配列を返す関数
+//   // UseStateの返す関数には、1つ目は、ステート値, 2つ目はsetter
+//   // Returns a stateful value, and a function to update it.
+//   // hookは更新が起こると、hookされたコンポーネントを自動で再描画する
+//   const [selectedStars, setSelectedStars] = useState(0);
+//   return (
+//     <div style={{ padding: "5px", ...style }} {...props}>
+//       {[...Array(totalStars)].map((n, i) => (
+//         <Star
+//           key={i}
+//           selected={selectedStars > i}
+//           onSelect={() => setSelectedStars(i + 1)}
+//         />
+//       ))}
+//       <p>
+//         {selectedStars} of {totalStars} stars
+//       </p>
+//     </div>
+//   );
+// }
 
 export default function StarRating({ style = {}, totalStars = 5, ...props }) {
   // ステートの初期値を受け取って、配列を返す関数
-  // UseStateの返す関数には、1つ目は、ステート値, 2つ目はsetter
+  // UseStateの返す関数には、1つ目は、ステート値, 2つ目はsetter関数
   // Returns a stateful value, and a function to update it.
   // hookは更新が起こると、hookされたコンポーネントを自動で再描画する
   const [selectedStars, setSelectedStars] = useState(0);
+
+  // [...Array(totalStars)]undefined配列作成
+  // return [...Array(totalStars)].map((_, i) => <Star key={i} selected={selectedStars > i}/>)
   return (
-    <div style={{ padding: "5px", ...style }} {...props}>
+    <div style={{padding: "5px", ...style}} {...props}>
       {[...Array(totalStars)].map((n, i) => (
         <Star
           key={i}
