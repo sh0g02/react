@@ -1,12 +1,8 @@
 import React from "react";
 import {render} from "react-dom";
-import StarRating from "./StarRating";
+import App from "./App"
 
 render(
-  <StarRating
-    style={{ backgroundColor: "lightblue" }}
-    onDoubleClick={e => alert('doubleClick!!!')}
-  />,
+  <App/>,
   document.getElementById('root')
 );
-
