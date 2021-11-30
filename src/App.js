@@ -1,24 +1,42 @@
 import React, {useState} from "react";
 import colorData from "./color-data.json";
 import ColorList from "./ColorList";
+import AddColorForm from "./AddColorForm";
+import { v4 } from "uuid";
 
 export default function App() {
   const [colors, setColors] = useState(colorData);
   return (
-    <ColorList
-      colors={colors}
-      onRemoveColor={id => {
-        const newColors = colors.filter(color => color.id !== id);
-        setColors(newColors)
-      }}
-      onRateColor={(id, rating) => {
-        const newColors = colors.map(color =>
-          // idをもとに、color配列を検索して、更新
-          // そのほかはそのまま
-          color.id === id ? {...color, rating} : color
-        );
-        setColors(newColors);
-      }}
-    />
+    <>
+      <AddColorForm
+        onNewColor={(title, color) => {
+          const newColors = [
+            ...colors,
+            {
+              id: v4(),
+              rating: 0,
+              title,
+              color,
+            }
+          ];
+          setColors(newColors);
+        }}
+      />
+      <ColorList
+        colors={colors}
+        onRemoveColor={id => {
+          const newColors = colors.filter(color => color.id !== id);
+          setColors(newColors)
+        }}
+        onRateColor={(id, rating) => {
+          const newColors = colors.map(color =>
+            // idをもとに、color配列を検索して、更新
+            // そのほかはそのまま
+            color.id === id ? {...color, rating} : color
+          );
+          setColors(newColors);
+        }}
+      />
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import useInput from "./hooks"
+import { useInput } from "./hooks"
 
 /**
  * 制御されていないコンポーネントの例
@@ -45,7 +45,7 @@ export default function AddColorForm({ onNewColor = f => f }) {
 
   const submit = (e) => {
     e.preventDefault();
-    onNewColor(title, color);
+    onNewColor(titleProps.value, colorProps.value);
     resetTitle();
     resetColor();
   }
