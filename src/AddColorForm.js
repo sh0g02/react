@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import useInput from "./hooks"
 
 /**
  * 制御されていないコンポーネントの例
@@ -28,29 +29,41 @@ import React, {useRef} from "react";
 //   );
 // }
 
+/**
+ * 制御されたコンポーネント例
+ * @param onNewColor
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AddColorForm({ onNewColor = f => f }) {
-  const [title, setTitle] = useState("");
-  const [color, setColor] = useState("#000000");
+  // const [title, setTitle] = useState("");
+  // const [color, setColor] = useState("#000000");
+
+  // カスタムフックを使って、useStateを呼び出す
+  const [titleProps, resetTitle] = useInput("");
+  const [colorProps, resetColor] = useInput("#000000");
 
   const submit = (e) => {
     e.preventDefault();
     onNewColor(title, color);
-    setTitle("");
-    setColor("");
+    resetTitle();
+    resetColor();
   }
 
   return (
     <form onSubmit={submit}>
       <input
-        value={title}
-        onChange={event => setTitle(event.target.value)} // 入力値が更新される度にstateを更新 -> ユーザの入力とstateを同期する
+        // value={title}
+        // onChange={event => setTitle(event.target.value)} // 入力値が更新される度にstateを更新 -> ユーザの入力とstateを同期する
+        {...titleProps}
         type="text"
         placeholder="color title..."
         required
       />
       <input
-        value={color}
-        onChange={event => setColor(event.target.value)}
+        // value={color}
+        // onChange={event => setColor(event.target.value)}
+        {...colorProps}
         type="color"
         required
       />
